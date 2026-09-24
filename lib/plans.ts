@@ -219,6 +219,25 @@ export function ensureFreeTrial(business: Business, now = new Date()): Business 
   return business;
 }
 
+/** Support/admin can reset the one-time trial clock when activating free. */
+export function applyAdminPlanChange(business: Business, nextId: PlanId, now = new Date()): { business: Business; error?: string } {
+  const next = normalizePlanId(nextId);
+  if (!next) return { business, error: "خطة غير معروفة." };
+  if (next === "free") {
+    return {
+      business: {
+        ...business,
+        planId: "free",
+        notifyChannel: business.notifyChannel || "owner",
+        freeStartedAt: now.toISOString(),
+        freeUsed: false,
+        requestedPlanId: "free",
+      },
+    };
+  }
+  return applyPlanChange({ ...business, freeUsed: true }, next, now);
+}
+
 export function applyPlanChange(business: Business, nextId: PlanId, now = new Date()): { business: Business; error?: string } {
   const next = normalizePlanId(nextId);
   if (!next) return { business, error: "خطة غير معروفة." };

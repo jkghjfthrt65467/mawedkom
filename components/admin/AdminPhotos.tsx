@@ -1,50 +1,51 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ImageField, ProjectGalleryField } from "@/components/owner/ImageField";
-import { BUSINESSES } from "@/lib/data";
-import { useLiveBusinesses } from "@/lib/live-business";
-import { logoutAdmin } from "@/lib/store";
-import { useRouter } from "next/navigation";
+import { adminGet } from "@/components/admin/admin-api";
+import type { AdminBusinessRow } from "@/lib/admin-view";
+import { showToast } from "@/lib/toast";
 
-export function AdminPhotos() {
-  const router = useRouter();
-  const live = useLiveBusinesses(BUSINESSES);
+export function AdminPhotos({ embedded = false }: { embedded?: boolean }) {
+  const [rows, setRows] = useState<AdminBusinessRow[]>([]);
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    void adminGet<{ businesses: AdminBusinessRow[] }>("/api/admin/businesses")
+      .then((data) => setRows(data.businesses || []))
+      .catch((err: unknown) => {
+        showToast(err instanceof Error ? err.message : "فشل تحميل الصور.", "err");
+      });
+  }, []);
+
   const filtered = useMemo(() => {
     const q = query.trim();
-    if (!q) return live;
-    return live.filter((b) => `${b.name} ${b.district} ${b.staff.map((s) => s.name).join(" ")}`.includes(q));
-  }, [live, query]);
+    if (!q) return rows;
+    return rows.filter((b) => `${b.name} ${b.district} ${b.staff.map((s) => s.name).join(" ")}`.includes(q));
+  }, [rows, query]);
 
   return (
     <div className="space-y-6">
-      <header className="nubo-card-ink p-6">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-sm text-gold">أدمن الموقع</p>
-            <h1 className="mt-1 text-3xl font-bold">صور المشاريع والموظفين</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-7 text-ink/80">
-              ارفع أو احذف صورة الغلاف ومعرض المشروع وصور كل موظف. التعديل يظهر فوراً بصفحات الحجز والقائمة.
-            </p>
-          </div>
-          <button
-            type="button"
-            className="nubo-btn nubo-btn-ghost text-terracotta"
-            onClick={() => {
-              logoutAdmin();
-              router.push("/");
-            }}
-          >
-            خروج الأدمن
-          </button>
-        </div>
-      </header>
+      {!embedded && (
+        <header className="nubo-card-ink p-6">
+          <h1 className="text-3xl font-bold">صور المشاريع والموظفين</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-7 text-muted">
+            ارفع أو احذف صورة الغلاف ومعرض المشروع وصور كل موظف.
+          </p>
+        </header>
+      )}
 
       <label className="grid gap-1 text-sm">
         بحث عن مشروع أو موظف
-        <input className="rounded-2xl border border-line px-3 py-3" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="مثلاً الرافدين أو حسن" />
+        <input
+          className="rounded-2xl border border-line px-3 py-3"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="مثلاً الرافدين أو حسن"
+        />
       </label>
+
+      {filtered.length === 0 && <p className="text-sm text-muted">ماكو مشاريع بهالبحث.</p>}
 
       <div className="grid gap-5">
         {filtered.map((b) => (

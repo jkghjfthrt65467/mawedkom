@@ -104,6 +104,8 @@ export type Business = {
   reviews: Review[];
   galleryLabels: string[];
   featured?: boolean;
+  /** Admin hide from public catalog and sitemap. Direct links still work. */
+  hidden?: boolean;
   /** Cover / hero image. */
   photo?: string;
   /** Circular profile image. Falls back to initials when empty. */

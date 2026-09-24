@@ -820,7 +820,7 @@ export const BLOG = [
 ];
 
 export function formatIqd(n: number) {
-  return `${formatNumber(n)} د.ع`;
+  return `${formatNumber(Number(n) || 0)} د.ع`;
 }
 
 export function slotsForDate(dateIso: string, durationMin: number) {

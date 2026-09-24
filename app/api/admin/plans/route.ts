@@ -1,16 +1,15 @@
-import { listManagedBusinesses, saveManagedBusinessToDisk } from "@/lib/business-server";
-import { applyPlanChange, normalizePlanId, planOf } from "@/lib/plans";
-import { actorFromRequest } from "@/lib/upload-server";
+import { adminCatalog, saveManagedBusinessToDisk } from "@/lib/business-server";
+import { requireAdmin } from "@/lib/admin-auth";
+import { applyAdminPlanChange, normalizePlanId, planOf } from "@/lib/plans";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
-  if (actorFromRequest(req) !== "admin") {
-    return NextResponse.json({ ok: false, error: "صلاحية الأدمن مطلوبة." }, { status: 401 });
-  }
-  const businesses = (await listManagedBusinesses()).map((b) => ({
+  const denied = requireAdmin(req);
+  if (denied) return denied;
+  const businesses = (await adminCatalog()).map((b) => ({
     slug: b.slug,
     name: b.name,
     phone: b.phone,
@@ -24,9 +23,8 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  if (actorFromRequest(req) !== "admin") {
-    return NextResponse.json({ ok: false, error: "صلاحية الأدمن مطلوبة." }, { status: 401 });
-  }
+  const denied = requireAdmin(req);
+  if (denied) return denied;
   let body: { slug?: string; planId?: string } = {};
   try {
     body = (await req.json()) as { slug?: string; planId?: string };
@@ -38,11 +36,11 @@ export async function POST(req: Request) {
   if (!slug || !planId) {
     return NextResponse.json({ ok: false, error: "المشروع والخطة مطلوبين." }, { status: 400 });
   }
-  const current = (await listManagedBusinesses()).find((b) => b.slug === slug);
+  const current = (await adminCatalog()).find((b) => b.slug === slug);
   if (!current) {
     return NextResponse.json({ ok: false, error: "ما لقينا هالمشروع." }, { status: 404 });
   }
-  const changed = applyPlanChange(current, planId);
+  const changed = applyAdminPlanChange(current, planId);
   if (changed.error) {
     return NextResponse.json({ ok: false, error: changed.error }, { status: 402 });
   }

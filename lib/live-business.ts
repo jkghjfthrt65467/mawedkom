@@ -23,6 +23,7 @@ export function withOwnerDefaults(b: Business): Business {
     approvalMode: b.approvalMode || "AUTO",
     whatsappLink: b.whatsappLink || `https://wa.me/${waNumber}`,
     bookingIntakePaused: Boolean(b.bookingIntakePaused),
+    hidden: Boolean(b.hidden),
     showStaffPicker: b.showStaffPicker !== false,
     reminderEnabled: b.reminderEnabled !== false,
     staffWhatsAppEnabled: b.staffWhatsAppEnabled !== false,

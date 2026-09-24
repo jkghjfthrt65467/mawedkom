@@ -35,6 +35,20 @@ export async function writeDoc(key: string, value: unknown): Promise<void> {
   await writeJsonFile(fileFor(key), value);
 }
 
+export async function deleteDoc(key: string): Promise<boolean> {
+  if (hasDatabase()) {
+    await ensureSchema();
+    const rows = await query<{ key: string }>("DELETE FROM kv WHERE key = $1 RETURNING key", [key]);
+    return rows.length > 0;
+  }
+  try {
+    await fs.unlink(fileFor(key));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export async function hasDoc(key: string): Promise<boolean> {
   if (hasDatabase()) {
     await ensureSchema();

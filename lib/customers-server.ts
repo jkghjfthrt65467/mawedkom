@@ -9,6 +9,11 @@ function keyOf(slug: string, phone: string) {
   return `${slug}:${phone.replace(/\D/g, "")}`;
 }
 
+export async function listAllCustomers(): Promise<(CustomerProfile & { businessSlug: string })[]> {
+  const all = await readDoc<Row[]>(KEY, []);
+  return [...all].sort((a, b) => (b.updatedAt || "").localeCompare(a.updatedAt || ""));
+}
+
 export async function listCustomers(slug: string): Promise<CustomerProfile[]> {
   const all = await readDoc<Row[]>(KEY, []);
   return all

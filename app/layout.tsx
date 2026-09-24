@@ -19,7 +19,6 @@ const dubai = localFont({
   ],
   variable: "--font-dubai",
   display: "swap",
-  declarations: [{ prop: "font-feature-settings", value: '"locl" 0' }],
 });
 
 const HOME_DESC = `${BRAND_AR} منصة عراقية لحجز مواعيد العيادات والأطباء وعلماء النفس والعلاج الطبيعي والصالونات وأخصائيي التجميل وتزيين الحيوانات وأكثر. ابحث ببغداد والبصرة وأربيل وباقي المحافظات، واحجز بدون تطبيق.`;

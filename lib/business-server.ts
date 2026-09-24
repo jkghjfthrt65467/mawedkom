@@ -3,7 +3,7 @@ import { weekdayHoursFromLegacy } from "./availability";
 import { withStaffPermissionDefaults } from "./staff-permissions";
 import { sortedServices, withServiceDefaults } from "./services";
 import { mergeStaffFromSeed } from "./staff-merge";
-import { hasDoc, listDocs, readDoc, writeDoc } from "./persist";
+import { deleteDoc, hasDoc, listDocs, readDoc, writeDoc } from "./persist";
 import { MANAGED_SLUG } from "./store-constants";
 import type { Business } from "./types";
 
@@ -124,6 +124,7 @@ export function blankBusiness(input: {
     reviews: [],
     galleryLabels: [],
     featured: true,
+    hidden: false,
     approvalMode: "AUTO",
     reminderEnabled: true,
     staffWhatsAppEnabled: true,
@@ -147,7 +148,7 @@ export async function getPublicBusiness(slug: string): Promise<Business | null> 
   return businessBySlug(slug) || null;
 }
 
-export async function publicCatalog(): Promise<Business[]> {
+export async function adminCatalog(): Promise<Business[]> {
   const disk = await listManagedBusinesses();
   const map = new Map<string, Business>();
   for (const b of BUSINESSES) map.set(b.slug, b);
@@ -156,4 +157,26 @@ export async function publicCatalog(): Promise<Business[]> {
     map.set(b.slug, prev ? { ...prev, ...b, slug: b.slug } : b);
   }
   return [...map.values()];
+}
+
+export async function publicCatalog(): Promise<Business[]> {
+  return (await adminCatalog()).filter((b) => !b.hidden);
+}
+
+export async function deleteManagedBusiness(slug: string): Promise<boolean> {
+  const key = bizKey(slug);
+  const existed = await hasDoc(key);
+  if (existed) await deleteDoc(key);
+  if (slug === MANAGED_SLUG) await deleteDoc("managed-business");
+  const seed = businessBySlug(slug);
+  if (seed) {
+    await saveManagedBusinessToDisk({
+      ...seed,
+      hidden: true,
+      bookingIntakePaused: true,
+      featured: false,
+    });
+    return true;
+  }
+  return existed;
 }

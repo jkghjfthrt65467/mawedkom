@@ -14,7 +14,8 @@ export function toLatinDigits(value: string | number): string {
 }
 
 export function formatNumber(n: number, opts?: Intl.NumberFormatOptions) {
-  return toLatinDigits(n.toLocaleString(AR_IQ_LATN, opts));
+  const value = Number(n);
+  return toLatinDigits((Number.isFinite(value) ? value : 0).toLocaleString(AR_IQ_LATN, opts));
 }
 
 export function formatDateLatn(

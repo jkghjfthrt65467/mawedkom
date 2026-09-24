@@ -13,6 +13,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
   const book = path.startsWith("/book/");
   const portal = isPortalPath(path);
   const calendarWide = path === "/business/manage/calendar" || path === "/staff";
+  const admin = path.startsWith("/admin");
   return (
     <>
       {book ? null : portal ? <PortalHeader /> : <Header />}
@@ -22,7 +23,9 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
             ? "min-h-screen"
             : calendarWide
               ? "mx-auto min-h-[70vh] max-w-[100rem] px-3 py-4 lg:px-5"
-              : "mx-auto min-h-[70vh] max-w-6xl px-4 py-8"
+              : admin
+                ? "mx-auto min-h-[70vh] max-w-7xl px-4 py-6"
+                : "mx-auto min-h-[70vh] max-w-6xl px-4 py-8"
         }
       >
         {children}

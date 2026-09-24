@@ -97,6 +97,11 @@ export async function enqueueOwnerMessage(input: {
   return item;
 }
 
+export async function listAllPendingOutbox(): Promise<OutboxItem[]> {
+  const rows = await readAll();
+  return rows.filter((r) => r.status === "pending");
+}
+
 export async function listPendingOutbox(slug: string): Promise<OutboxItem[]> {
   if (hasDatabase()) {
     await ensureSchema();

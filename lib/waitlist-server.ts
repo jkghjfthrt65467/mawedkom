@@ -3,9 +3,22 @@ import type { WaitlistEntry } from "./types";
 
 const KEY = "waitlist";
 
+export async function listAllWaitlist(): Promise<WaitlistEntry[]> {
+  const all = await readDoc<WaitlistEntry[]>(KEY, []);
+  return [...all].sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""));
+}
+
 export async function listWaitlist(slug: string): Promise<WaitlistEntry[]> {
   const all = await readDoc<WaitlistEntry[]>(KEY, []);
   return all.filter((r) => r.businessSlug === slug);
+}
+
+export async function removeWaitlist(id: string): Promise<boolean> {
+  const all = await readDoc<WaitlistEntry[]>(KEY, []);
+  const next = all.filter((r) => r.id !== id);
+  if (next.length === all.length) return false;
+  await writeDoc(KEY, next);
+  return true;
 }
 
 export async function addWaitlist(entry: Omit<WaitlistEntry, "id" | "createdAt"> & { id?: string }): Promise<WaitlistEntry> {

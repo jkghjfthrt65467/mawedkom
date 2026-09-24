@@ -30,10 +30,9 @@ export function AdminGate({ children }: { children: React.ReactNode }) {
           }
         }}
       >
-        <p className="text-sm text-gold">أدمن الموقع</p>
-        <h1 className="text-2xl font-bold">لوحة الأدمن</h1>
+        <h1 className="text-2xl font-bold">أدمن موعدكم</h1>
         <p className="text-sm leading-7 text-muted">
-          تفعيل الخطط من الدعم، ورفع أو حذف صور أي مشروع وموظفيه.
+          دخول لدعم الموقع: تفعيل الخطط، إيقاف الحجوزات، إخفاء المشاريع، الحجوزات، الصور، وواتساب.
         </p>
         <label className="grid gap-1 text-sm">
           رمز الأدمن
