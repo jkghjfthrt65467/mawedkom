@@ -19,11 +19,6 @@ export function Header() {
     { href: "/salons", label: t("nav.book") },
     { href: "/business", label: t("nav.business") },
     { href: "/pricing", label: t("nav.pricing") },
-    { href: "/business/manage", label: t("nav.manage") },
-    { href: "/admin", label: t("nav.admin") },
-    { href: "/whatsapp", label: t("nav.whatsapp") },
-    { href: "/faq", label: t("nav.faq") },
-    { href: "/blog", label: t("nav.blog") },
   ];
 
   useEffect(() => {
@@ -31,25 +26,19 @@ export function Header() {
     setOpen(false);
   }, [path]);
 
+  function active(href: string) {
+    if (href === "/business") return path === "/business" || path.startsWith("/business/signup");
+    return path === href || path.startsWith(`${href}/`);
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-canvas">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
         <Logo />
-        <ul className="hidden items-center gap-5 text-sm font-medium text-ink/80 lg:flex">
+        <ul className="hidden items-center gap-6 text-sm font-medium text-ink/80 lg:flex">
           {NAV.map((l) => (
             <li key={l.href}>
-              <Link
-                href={l.href}
-                className={
-                  l.href === "/business"
-                    ? path === "/business" || path.startsWith("/business/signup")
-                      ? "text-palm"
-                      : "hover:text-palm"
-                    : path === l.href || path.startsWith(`${l.href}/`)
-                      ? "text-palm"
-                      : "hover:text-palm"
-                }
-              >
+              <Link href={l.href} className={active(l.href) ? "text-palm" : "hover:text-palm"}>
                 {l.label}
               </Link>
             </li>

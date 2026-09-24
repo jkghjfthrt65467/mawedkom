@@ -79,19 +79,6 @@ export function HomePageView({ featured, categoryCount }: { featured: Business[]
         ))}
       </section>
 
-      <section>
-        <div className="mb-5 flex items-end justify-between gap-3">
-          <div>
-            <h2 className="text-2xl font-bold">{t("home.plansTitle")}</h2>
-            <p className="mt-2 text-sm leading-7 text-muted">{t("home.plansLead")}</p>
-          </div>
-          <Link href="/pricing" className="shrink-0 text-sm font-semibold text-palm">
-            {t("home.allDetails")}
-          </Link>
-        </div>
-        <PlansGrid />
-      </section>
-
       <section className="nubo-bento-cats">
         <div className="mb-5 flex items-end justify-between">
           <h2 className="text-2xl font-bold">{t("home.allFields")}</h2>
@@ -146,6 +133,19 @@ export function HomePageView({ featured, categoryCount }: { featured: Business[]
         <Link href="/faq" className="mt-3 inline-block text-sm font-semibold text-palm">
           {t("home.allFaq")}
         </Link>
+      </section>
+
+      <section>
+        <div className="mb-5 flex items-end justify-between gap-3">
+          <div>
+            <h2 className="text-2xl font-bold">{t("home.plansTitle")}</h2>
+            <p className="mt-2 text-sm leading-7 text-muted">{t("home.plansLead")}</p>
+          </div>
+          <Link href="/pricing" className="shrink-0 text-sm font-semibold text-palm">
+            {t("home.allDetails")}
+          </Link>
+        </div>
+        <PlansGrid />
       </section>
     </div>
   );

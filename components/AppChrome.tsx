@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { PortalHeader } from "@/components/PortalHeader";
 
@@ -14,6 +15,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
   const portal = isPortalPath(path);
   const calendarWide = path === "/business/manage/calendar" || path === "/staff";
   const admin = path.startsWith("/admin");
+  const publicChrome = !book && !portal && !admin;
   return (
     <>
       {book ? null : portal ? <PortalHeader /> : <Header />}
@@ -30,6 +32,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
       >
         {children}
       </main>
+      {publicChrome ? <Footer /> : null}
     </>
   );
 }
