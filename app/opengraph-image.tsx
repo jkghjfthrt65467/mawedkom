@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { BRAND_AR, BRAND_TAGLINE } from "@/lib/brand";
+import { BRAND_EN } from "@/lib/brand";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -33,10 +33,10 @@ export default function OpenGraphImage() {
             fontWeight: 700,
           }}
         >
-          م
+          M
         </div>
-        <div style={{ marginTop: 36, fontSize: 72, fontWeight: 700 }}>{BRAND_AR}</div>
-        <div style={{ marginTop: 12, fontSize: 32, color: "#555555" }}>{BRAND_TAGLINE}</div>
+        <div style={{ marginTop: 36, fontSize: 72, fontWeight: 700 }}>{BRAND_EN}</div>
+        <div style={{ marginTop: 12, fontSize: 32, color: "#555555" }}>Booking in Iraq</div>
       </div>
     ),
     size,

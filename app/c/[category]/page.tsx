@@ -1,7 +1,7 @@
 import { publicCatalog } from "@/lib/business-server";
 import { CATEGORIES, categoryBySlug, filterBusinesses } from "@/lib/data";
 import { publicMeta } from "@/lib/seo";
-import { Listing } from "../../salons/page";
+import { Listing } from "@/components/Listing";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
