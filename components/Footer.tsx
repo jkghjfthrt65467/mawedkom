@@ -25,6 +25,7 @@ export function Footer() {
             <li><Link href="/contact">{t("footer.contact")}</Link></li>
             <li><Link href="/privacy">{t("footer.privacy")}</Link></li>
             <li><Link href="/terms">{t("footer.terms")}</Link></li>
+            <li><Link href="/refund">{t("footer.refund")}</Link></li>
             <li><Link href="/whatsapp">{t("nav.whatsapp")}</Link></li>
             <li><Link href="/business/manage">{t("nav.manage")}</Link></li>
             <li><Link href="/admin">{t("nav.admin")}</Link></li>
