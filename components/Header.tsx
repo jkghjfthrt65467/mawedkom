@@ -77,7 +77,7 @@ export function Header() {
         </div>
       </nav>
       {open && (
-        <div className="nubo-glass border-t border-line px-4 py-4 lg:hidden">
+        <div className="nubo-menu-panel nubo-glass border-t border-line px-4 py-4 lg:hidden">
           <ul className="grid gap-1 text-sm font-medium">
             {NAV.map((l) => (
               <li key={l.href}>

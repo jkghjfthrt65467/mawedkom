@@ -12,7 +12,7 @@ function Glyph({
   children: ReactNode;
 }) {
   return (
-    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" className={`shrink-0 ${className ?? ""}`} aria-hidden>
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" className={`nubo-cat-glyph shrink-0 ${className ?? ""}`} aria-hidden>
       {children}
     </svg>
   );

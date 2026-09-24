@@ -376,7 +376,11 @@ export function BookingWizard({
           </span>
         </div>
         <div className="nubo-progress" aria-hidden>
-          <span style={{ width: `${((Math.min(step, visualSteps - 1) + 1) / visualSteps) * 100}%` }} />
+          <span
+            style={{
+              ["--p" as string]: String((Math.min(step, visualSteps - 1) + 1) / visualSteps),
+            }}
+          />
         </div>
         {step > 0 && services.length > 0 && (
           <p className="mt-3 text-sm leading-6 text-muted">

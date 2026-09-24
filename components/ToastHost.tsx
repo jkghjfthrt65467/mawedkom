@@ -31,7 +31,7 @@ export function ToastHost() {
       {items.map((t) => (
         <p
           key={t.id}
-          className={`pointer-events-auto nubo-glass px-4 py-3 text-sm ${
+          className={`nubo-toast pointer-events-auto nubo-glass px-4 py-3 text-sm ${
             t.kind === "ok" ? "text-ink" : "border-terracotta/40 text-terracotta"
           }`}
         >

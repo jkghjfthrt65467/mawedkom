@@ -43,9 +43,10 @@ export function Listing({
             <Link
               key={c.slug}
               href={city ? `/c/${c.slug}/${city}` : `/c/${c.slug}`}
-              className={`nubo-chip inline-flex items-center gap-1.5 ${category === c.slug ? "nubo-chip-on" : ""}`}
+              data-cat={c.slug}
+              className={`nubo-cat-chip nubo-chip inline-flex items-center gap-1.5 ${category === c.slug ? "nubo-chip-on" : ""}`}
             >
-              <CategoryIcon slug={c.slug} size={16} className="h-4 w-4" />
+              <CategoryIcon slug={c.slug} size={16} className="nubo-cat-glyph h-4 w-4" />
               {c.name}
             </Link>
           ))}

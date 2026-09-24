@@ -33,10 +33,11 @@ export function CategoryGrid({
                 <Link
                   key={slug}
                   href={hrefFor?.(slug) ?? `/c/${slug}`}
-                  className="nubo-card nubo-select-card flex flex-col items-center px-3 py-5 text-center"
+                  data-cat={slug}
+                  className="nubo-cat nubo-card nubo-select-card flex flex-col items-center px-3 py-5 text-center"
                 >
-                  <span className="grid h-16 w-16 place-items-center rounded-full bg-palm text-white shadow-[0_10px_20px_-12px_rgba(255,120,2,0.85)]">
-                    <CategoryIcon slug={slug} size={30} className="h-[30px] w-[30px]" />
+                  <span className="nubo-cat-badge grid h-16 w-16 place-items-center rounded-full bg-palm text-white shadow-[0_10px_20px_-12px_rgba(255,120,2,0.85)]">
+                    <CategoryIcon slug={slug} size={30} className="nubo-cat-glyph h-[30px] w-[30px]" />
                   </span>
                   <p className="mt-3 text-sm font-bold leading-6">{categoryLabel(t.locale, slug)}</p>
                   {showBlurb ? <p className="mt-1 line-clamp-2 text-xs leading-6 text-muted">{categoryBlurb(t.locale, slug)}</p> : null}
