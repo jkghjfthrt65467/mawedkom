@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "موعدكم",
+    "slug": "mawedkom-owner",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "mawedkom",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.mawedkom.owner",
+      "adaptiveIcon": {
+        "backgroundColor": "#ff7802"
+      },
+      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"],
+      "usesCleartextTraffic": true
+    }
+  }
+}

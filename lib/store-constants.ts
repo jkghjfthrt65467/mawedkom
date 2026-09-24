@@ -1,0 +1,9 @@
+export const MANAGED_SLUG = "rafidain-barber";
+export const ACTIVE_SLUG_KEY = "nubo-active-slug";
+export const MANAGER_PIN = "1234";
+export const STAFF_PIN = "1234";
+export const ADMIN_PIN = "9999";
+export const BUSINESS_EVENT = "nubo-business";
+export const MEDIA_EVENT = "nubo-media";
+export const STAFF_SESSION_KEY = "nubo-staff-session";
+export const ADMIN_KEY = "nubo-admin";

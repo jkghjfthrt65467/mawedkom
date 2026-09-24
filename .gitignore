@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+.DS_Store
+*.log
+.env*.local
+next-env.d.ts
+.wa-session
+.wa-session/
+.data/
+public/uploads/*
+!public/uploads/.gitkeep
+tsconfig.tsbuildinfo
+.agents/

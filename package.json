@@ -1,0 +1,39 @@
+{
+  "name": "mawedkom",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "wa": "node scripts/whatsapp-gateway.mjs",
+    "test:messages": "node --experimental-strip-types scripts/test-booking-messages.mts",
+    "test:calendar": "node --experimental-strip-types scripts/test-calendar-integrity.mts",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@iconscout/react-unicons": "^2.2.5",
+    "@whiskeysockets/baileys": "^6.7.21",
+    "next": "^15.5.25",
+    "pg": "^8.23.0",
+    "pino": "^9.9.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.20.2",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.4",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}

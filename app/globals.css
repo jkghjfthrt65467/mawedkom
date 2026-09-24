@@ -1,0 +1,627 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-dubai), "Dubai", "Segoe UI", Tahoma, sans-serif;
+  --color-palm: #ff7802;
+  --color-palm-deep: #e56a00;
+  --color-palm-soft: #fff3e8;
+  --color-gold: #ff7802;
+  --color-gold-soft: #fff3e8;
+  --color-sand: #f6f6f6;
+  --color-ivory: #ffffff;
+  --color-ink: #111111;
+  --color-muted: #666666;
+  --color-line: #eeeeee;
+  --color-terracotta: #e24b2a;
+  --color-canvas: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f6f6f6;
+}
+
+:root {
+  color-scheme: light;
+  --nubo-canvas: #ffffff;
+  --nubo-surface: #ffffff;
+  --nubo-surface-2: #f6f6f6;
+  --nubo-elevated: #ffffff;
+  --nubo-text: #111111;
+  --nubo-text-muted: #666666;
+  --nubo-line: #eeeeee;
+  --nubo-line-strong: #e0e0e0;
+  --nubo-glass: rgba(255, 255, 255, 0.92);
+  --nubo-glass-border: #eeeeee;
+  --nubo-overlay: rgba(17, 17, 17, 0.45);
+  --nubo-input: #ffffff;
+  --nubo-accent: #ff7802;
+  --nubo-accent-deep: #e56a00;
+  --nubo-on-accent: #ffffff;
+  --nubo-danger: #e24b2a;
+  --nubo-radius: 1.25rem;
+  --nubo-radius-sm: 0.9rem;
+  --nubo-shadow: 0 10px 28px -22px rgba(0, 0, 0, 0.18);
+  --nubo-shadow-press: 0 8px 20px -14px rgba(255, 120, 2, 0.55);
+  --motion-fast: 140ms;
+  --motion-med: 220ms;
+  --cal-available: #ffffff;
+  --cal-selected: #ff7802;
+  --cal-booked: #fff3e8;
+  --cal-holiday: #ffece8;
+  --cal-disabled: #f6f6f6;
+}
+
+html.dark {
+  color-scheme: dark;
+  --color-palm-soft: color-mix(in srgb, #ff7802 18%, transparent);
+  --color-gold-soft: color-mix(in srgb, #ff7802 14%, transparent);
+  --color-sand: #1c222e;
+  --color-ivory: #ffffff;
+  --color-ink: #f3efe8;
+  --color-muted: #9b948a;
+  --color-line: rgba(255, 255, 255, 0.1);
+  --color-terracotta: #ff7a5c;
+  --color-canvas: #0a0c10;
+  --color-surface: #141821;
+  --color-surface-2: #1c222e;
+  --nubo-canvas: #0a0c10;
+  --nubo-surface: #141821;
+  --nubo-surface-2: #1c222e;
+  --nubo-elevated: #222a38;
+  --nubo-text: #f3efe8;
+  --nubo-text-muted: #9b948a;
+  --nubo-line: rgba(255, 255, 255, 0.1);
+  --nubo-line-strong: rgba(255, 255, 255, 0.16);
+  --nubo-glass: rgba(20, 24, 33, 0.62);
+  --nubo-glass-border: rgba(255, 255, 255, 0.1);
+  --nubo-overlay: rgba(4, 6, 10, 0.62);
+  --nubo-input: #12161f;
+  --cal-available: rgba(255, 255, 255, 0.04);
+  --cal-booked: color-mix(in srgb, #ff7802 28%, #141821);
+  --cal-holiday: color-mix(in srgb, #ff7a5c 16%, #141821);
+  --cal-disabled: rgba(255, 255, 255, 0.03);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "locl" 0;
+  font-variant-numeric: lining-nums;
+}
+
+body {
+  background: #ffffff;
+  color: var(--nubo-text);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  font-feature-settings: "locl" 0;
+  font-variant-numeric: lining-nums;
+}
+
+input,
+textarea,
+select,
+button {
+  font-feature-settings: "locl" 0;
+  font-variant-numeric: lining-nums;
+}
+
+html.dark body {
+  background: var(--nubo-canvas);
+}
+
+::selection {
+  background: var(--nubo-accent);
+  color: #ffffff;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--nubo-accent);
+  outline-offset: 2px;
+}
+
+.nubo-card {
+  background: var(--nubo-surface);
+  border: 1px solid var(--nubo-line);
+  border-radius: var(--nubo-radius);
+  box-shadow: var(--nubo-shadow);
+}
+
+.nubo-card-ink {
+  position: relative;
+  background: var(--nubo-surface);
+  border: 1px solid var(--nubo-line);
+  border-radius: var(--nubo-radius);
+  color: var(--nubo-text);
+  box-shadow: var(--nubo-shadow);
+}
+
+.nubo-card-ink::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2px;
+  margin-bottom: 0.85rem;
+  background: var(--nubo-accent);
+}
+
+html.dark .nubo-card-ink {
+  background: var(--nubo-surface);
+  border-color: var(--nubo-line);
+}
+
+.nubo-glass {
+  background: var(--nubo-glass);
+  border: 1px solid var(--nubo-glass-border);
+  border-radius: var(--nubo-radius);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nubo-search {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--nubo-glass);
+  border: 1px solid var(--nubo-glass-border);
+  border-radius: var(--nubo-radius);
+}
+
+@media (min-width: 768px) {
+  .nubo-search {
+    grid-template-columns: 1fr 1fr 1.5fr auto;
+    align-items: start;
+    padding: 0.75rem;
+  }
+  .nubo-search--compact {
+    padding: 0.5rem;
+  }
+}
+
+.nubo-search-field {
+  width: 100%;
+  border: 0 !important;
+  background: color-mix(in srgb, var(--nubo-surface-2) 80%, transparent) !important;
+  border-radius: 1rem !important;
+  min-height: 48px;
+  padding-inline: 0.85rem;
+}
+
+.nubo-search-combo {
+  position: relative;
+}
+
+.nubo-search-combo .nubo-search-field {
+  padding-inline-end: 2.6rem;
+}
+
+.nubo-search-clear {
+  position: absolute;
+  inset-inline-end: 0.35rem;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  color: var(--nubo-text-muted);
+  transform: translateY(-50%);
+}
+
+.nubo-search-clear:hover {
+  color: var(--nubo-text);
+  background: var(--nubo-surface);
+}
+
+.nubo-search-list {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 30;
+  max-height: 18rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.35rem;
+  background: var(--nubo-surface);
+  border: 1px solid var(--nubo-line);
+  border-radius: 1rem;
+  box-shadow: var(--nubo-shadow);
+}
+
+.nubo-search-hit {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 44px;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.75rem;
+}
+
+.nubo-search-hit:hover,
+.nubo-search-hit.is-active {
+  background: var(--nubo-surface-2);
+}
+
+.nubo-search-kind {
+  flex-shrink: 0;
+  min-width: 3.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--nubo-accent);
+}
+
+.nubo-search-hint {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: var(--nubo-text-muted);
+}
+
+.nubo-search-empty {
+  padding: 0.75rem 0.65rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--nubo-text-muted);
+}
+
+.nubo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  border-radius: 999px;
+  font-weight: 600;
+  padding: 0.7rem 1.25rem;
+  transition: transform var(--motion-fast) ease, background var(--motion-fast) ease, border-color var(--motion-fast) ease, opacity var(--motion-fast) ease;
+}
+
+.nubo-btn:active {
+  transform: scale(0.97);
+}
+
+.nubo-btn-primary,
+.nubo-btn-gold {
+  background: var(--nubo-accent);
+  color: var(--nubo-on-accent);
+  box-shadow: var(--nubo-shadow-press);
+}
+
+.nubo-btn-primary:hover,
+.nubo-btn-gold:hover {
+  background: var(--nubo-accent-deep);
+}
+
+.nubo-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--nubo-line-strong);
+  color: var(--nubo-text);
+}
+
+.nubo-btn-ghost:hover {
+  border-color: var(--nubo-accent);
+  color: var(--nubo-accent);
+}
+
+.nubo-btn-cover {
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.45);
+}
+.nubo-btn-cover:hover {
+  background: #ffffff;
+  border-color: var(--nubo-accent);
+  color: var(--nubo-accent);
+}
+
+.nubo-btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.nubo-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 0 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: 1px solid var(--nubo-line);
+  background: var(--nubo-surface-2);
+  color: var(--nubo-text);
+  transition: transform var(--motion-fast) ease, border-color var(--motion-fast) ease, background var(--motion-fast) ease;
+}
+
+.nubo-chip:active {
+  transform: scale(0.97);
+}
+
+.nubo-chip-on {
+  background: var(--nubo-accent);
+  border-color: var(--nubo-accent);
+  color: var(--nubo-on-accent);
+}
+
+.nubo-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.12rem 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.nubo-tag-hot {
+  background: var(--nubo-accent);
+  color: #ffffff;
+}
+.nubo-tag-offer {
+  background: #fff3e8;
+  color: var(--nubo-accent-deep);
+  border: 1px solid color-mix(in srgb, var(--nubo-accent) 35%, #fff);
+}
+
+.nubo-nav-item {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  transition: background var(--motion-fast) ease, color var(--motion-fast) ease;
+}
+
+.nubo-nav-item-on {
+  background: var(--color-palm-soft);
+  color: var(--nubo-accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nubo-accent) 35%, transparent);
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: var(--nubo-text);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="hidden"]):not([type="range"]):not([type="color"]),
+select,
+textarea {
+  background: var(--nubo-input);
+  border: 1px solid var(--nubo-line);
+  border-radius: 1rem;
+  min-height: 44px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--nubo-accent);
+}
+
+option {
+  background: var(--nubo-surface);
+  color: var(--nubo-text);
+}
+
+.nubo-cal-day {
+  min-height: 4.5rem;
+  border-radius: 0.9rem;
+  border: 1px solid var(--nubo-line);
+  padding: 0.5rem;
+  text-align: right;
+  font-size: 0.875rem;
+  background: var(--cal-available);
+  transition: transform var(--motion-fast) ease, border-color var(--motion-fast) ease, background var(--motion-fast) ease;
+}
+
+.nubo-cal-day:hover {
+  border-color: color-mix(in srgb, var(--nubo-accent) 55%, var(--nubo-line));
+  background: color-mix(in srgb, var(--nubo-accent) 10%, var(--nubo-surface));
+}
+
+.nubo-cal-day:active {
+  transform: scale(0.98);
+}
+
+.nubo-cal-day--today {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nubo-accent) 50%, transparent);
+}
+
+.nubo-cal-day--selected {
+  background: var(--cal-selected);
+  border-color: var(--cal-selected);
+  color: var(--nubo-on-accent);
+}
+
+.nubo-cal-day--booked {
+  background: var(--cal-booked);
+  border-color: color-mix(in srgb, var(--nubo-accent) 40%, var(--nubo-line));
+}
+
+.nubo-cal-day--holiday {
+  background: var(--cal-holiday);
+  color: var(--nubo-text-muted);
+  border-style: dashed;
+}
+
+.nubo-cal-day--disabled,
+.nubo-cal-day--muted {
+  background: var(--cal-disabled);
+  opacity: 0.42;
+}
+
+.nubo-slot {
+  min-height: 44px;
+  border-radius: 0.85rem;
+  border: 1px solid var(--nubo-line);
+  background: var(--nubo-surface-2);
+  font-size: 0.875rem;
+  transition: transform var(--motion-fast) ease, border-color var(--motion-fast) ease, background var(--motion-fast) ease;
+}
+
+.nubo-slot:hover {
+  border-color: color-mix(in srgb, var(--nubo-accent) 50%, var(--nubo-line));
+}
+
+.nubo-slot:active {
+  transform: scale(0.97);
+}
+
+.nubo-slot--selected {
+  background: var(--color-palm-soft);
+  border-color: var(--nubo-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nubo-accent) 22%, transparent);
+  font-weight: 700;
+}
+
+.nubo-slot--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.nubo-slot--booked {
+  background: #ffece8;
+  border-color: var(--nubo-danger);
+  color: var(--nubo-danger);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.nubo-slot--booked:hover,
+.nubo-slot--booked:active {
+  transform: none;
+  border-color: var(--nubo-danger);
+}
+
+.nubo-select-card {
+  border: 1px solid var(--nubo-line);
+  border-radius: 1.1rem;
+  background: var(--nubo-surface-2);
+  text-align: right;
+  min-height: 44px;
+  transition: transform var(--motion-fast) ease, border-color var(--motion-fast) ease, background var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+}
+
+.nubo-select-card:active {
+  transform: scale(0.985);
+}
+
+.nubo-select-card--on {
+  border-color: var(--nubo-accent);
+  background: var(--color-palm-soft);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nubo-accent) 20%, transparent);
+}
+
+.nubo-progress {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--nubo-surface-2);
+}
+
+.nubo-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--nubo-accent);
+  transition: width var(--motion-med) ease;
+}
+
+.nubo-success-mark {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-inline: auto;
+  border-radius: 999px;
+  background: var(--color-palm-soft);
+  color: var(--nubo-accent);
+  animation: nubo-pop var(--motion-med) ease;
+}
+
+.nubo-confetti {
+  pointer-events: none;
+  position: relative;
+  height: 0;
+}
+
+.nubo-confetti i {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 6px;
+  height: 10px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: nubo-confetti var(--motion-med) ease-out forwards;
+}
+
+.nubo-confetti i:nth-child(1) { background: #ff7802; transform: translate(-40px, -8px) rotate(20deg); animation-delay: 20ms; }
+.nubo-confetti i:nth-child(2) { background: #ffd7b0; transform: translate(18px, -14px) rotate(-12deg); animation-delay: 40ms; }
+.nubo-confetti i:nth-child(3) { background: #ff9a3d; transform: translate(-8px, -22px) rotate(40deg); animation-delay: 60ms; }
+.nubo-confetti i:nth-child(4) { background: #fff; transform: translate(36px, -4px) rotate(-28deg); animation-delay: 30ms; }
+.nubo-confetti i:nth-child(5) { background: #ff7a5c; transform: translate(-28px, 6px) rotate(8deg); animation-delay: 50ms; }
+
+.nubo-bento {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 1024px) {
+  .nubo-bento-home {
+    grid-template-columns: 1.25fr 0.75fr;
+    grid-template-areas:
+      "hero cta"
+      "stats stats"
+      "cats cats";
+  }
+  .nubo-bento-hero { grid-area: hero; }
+  .nubo-bento-cta { grid-area: cta; }
+  .nubo-bento-stats { grid-area: stats; }
+  .nubo-bento-cats { grid-area: cats; }
+}
+
+.nubo-empty {
+  text-align: center;
+  padding: 2.25rem 1.25rem;
+}
+
+@keyframes nubo-pop {
+  from { transform: scale(0.72); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes nubo-confetti {
+  0% { opacity: 0; transform: translate(0, 8px) scale(0.4); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx, 24px), -36px) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .nubo-btn,
+  .nubo-chip,
+  .nubo-cal-day,
+  .nubo-slot,
+  .nubo-select-card,
+  .nubo-progress > span {
+    transition: none;
+  }
+  .nubo-btn:active,
+  .nubo-chip:active,
+  .nubo-cal-day:active,
+  .nubo-slot:active,
+  .nubo-select-card:active {
+    transform: none;
+  }
+  .nubo-success-mark,
+  .nubo-confetti i {
+    animation: none;
+  }
+}
